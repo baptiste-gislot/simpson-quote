@@ -1,18 +1,31 @@
 import React from 'react';
 import './quotecards.css';
 
-function QuoteCards(props) {
-    return (
+class QuoteCards extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            favorite: false
+        };
+    }
+    render() {
+        return (
         <figure className="QuoteCard">
-            <img src={props.image} alt={props.character}/>
+            <img src={this.props.image} alt={this.props.character}/>
             <figcaption>
             <blockquote>
-                {props.quote}
+                {this.props.quote}
             </blockquote>
-            <cite>{props.character}</cite>
+            <p>
+                <cite>{this.props.character}</cite>
+                <span onClick={() => {
+                    this.setState({favorite: !this.state.favorite});
+                }} className={this.state.favorite ? 'is-favorite' : ''}>&#9733;</span>
+            </p>
             </figcaption>
         </figure>
-    );
+        );
+    }
 }
 
 export default QuoteCards;
